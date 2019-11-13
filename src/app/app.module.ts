@@ -36,7 +36,7 @@ const appRoutes:Routes =[
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

@@ -29,7 +29,7 @@
               <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)"
                 *ngFor="let user of userList">
                 <div class="userPresence" *ngIf="user.userId != userInfo.userId">
-                 <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
+                 <app-user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></app-user-details>
                 </div>
               </li>
               
@@ -61,7 +61,7 @@
         <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chatting == true}"
           *ngFor="let user of userList" (click)="userSelectedToChat(user.userId, user.name)">
           <div class="userPresence" *ngIf="user.userId != userInfo.userId"  >
-            <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
+            <app-user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></app-user-details>
           </div>
         </li>
        
@@ -72,7 +72,7 @@
 
     <div class="col-12 col-sm-8 col-md-8 chat">
       <div class="chat-header clearfix mobileMenu" *ngIf="receiverName">
-        <first-char [userName]="receiverName" [userBg]="'blue'" [userColor]="'white'"></first-char>
+        <app-first-char [userName]="receiverName" [userBg]="'blue'" [userColor]="'white'"></app-first-char>
 
         <div class="chat-about">
           <div class="chat-with">Chat with {{receiverName}}</div>

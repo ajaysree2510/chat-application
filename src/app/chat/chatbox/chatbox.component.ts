@@ -5,7 +5,7 @@ import {AppService} from './../../app.service';
 import {Router} from '@angular/router';
 import { Cookie} from 'ng2-cookies/ng2-cookies';
 import {ToastrService} from 'ngx-toastr';
-
+import {ChatMessage} from './chat';
 @Component({
   selector: 'app-chatbox',
   templateUrl: './chatbox.component.html',
@@ -124,7 +124,7 @@ export class ChatboxComponent implements OnInit, AfterViewInit {
 
       if(this.messageText){
 
-      let chatMsgObject={
+      let chatMsgObject:ChatMessage={
 
         senderName:this.userInfo.firstName +" "+this.userInfo.lastName,
         senderId:this.userInfo.userId,
@@ -229,5 +229,28 @@ export class ChatboxComponent implements OnInit, AfterViewInit {
       this.scrollToChatTop=true;
 
       this.getPreviousChatWithAUser();
+    }
+
+    public logout:any=()=>{
+
+      this.AppService.logout().subscribe((apiResponse)=>{
+
+        if (apiResponse.status === 200){
+          
+          console.log("logout called")
+          Cookie.delete('authToken');
+          Cookie.delete('receiverId');
+          Cookie.delete('receiverName');
+
+          this.SocketService.exitSocket()
+
+          this.router.navigate(['/']);
+        }else{
+          this.toastr.error(apiResponse.message)
+        }
+      }, (err)=>{
+
+          this.toastr.error('some error occured')
+      });
     }
 }

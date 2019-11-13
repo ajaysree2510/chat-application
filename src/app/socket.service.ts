@@ -107,4 +107,10 @@ export class SocketService {
       return this.http.get(`${this.url}/api/v1/chat/get/for/user?senderId=${senderId}&receiverId=${receiverId}&skip=${skip}&authToken=${Cookie.get('authToken')}`)
       .pipe(tap(data=>console.log("Data Received")),catchError(this.handleError));
     }
+
+
+    public exitSocket=()=>{
+
+      this.socket.disconnect();
+    }
 }

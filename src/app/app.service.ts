@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Cookie} from 'ng2-cookies';
 
 //imported
 
@@ -50,7 +51,30 @@ export class AppService {
 
 private handleError(err: HttpErrorResponse){
 
-  
+  let errorMessage = '';
+
+  if (err.error instanceof Error) {
+
+    errorMessage = `An error occurred: ${err.error.message}`;
+
+  } else {
+
+    errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+
+  } // end condition *if
+
+  console.error(errorMessage);
+
+  return Observable.throw(errorMessage);
 }
+
+public logout(): Observable<any> {
+
+  const params = new HttpParams()
+    .set('authToken', Cookie.get('authtoken'))
+
+  return this.http.post(`${this.url}/api/v1/users/logout`, params);
+
+} // end logout function
 
 }
