@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../shared/shared.module';
 import { RemoveSpecialCharPipe } from '../shared/pipe/remove-special-char.pipe';
+import { ChatRouteGuardService } from './chat-route-guard.service';
 
 @NgModule({
   declarations: [ChatboxComponent, RemoveSpecialCharPipe],
@@ -16,9 +17,10 @@ import { RemoveSpecialCharPipe } from '../shared/pipe/remove-special-char.pipe';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forChild([
-      { path:'chat', component: ChatboxComponent}
+      { path:'chat', component: ChatboxComponent, canActivate:[ChatRouteGuardService]}
     ]),
     SharedModule
-  ]
+  ],
+  providers:[ChatRouteGuardService]
 })
 export class ChatModule { }

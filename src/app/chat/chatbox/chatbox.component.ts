@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import { Cookie} from 'ng2-cookies/ng2-cookies';
 import {ToastrService} from 'ngx-toastr';
 import {ChatMessage} from './chat';
+
 @Component({
   selector: 'app-chatbox',
   templateUrl: './chatbox.component.html',
@@ -59,26 +60,13 @@ export class ChatboxComponent implements OnInit, AfterViewInit {
       this.userSelectedToChat(this.receiverId,this.receiverName)
     }
 
-    this.checkStatus();
+    //this.checkStatus();
     this.verifyUserConfirmation();
     this.getOnUserList();
     this.getMessageFromAUser();
   }
 
-  public checkStatus:any=()=>{
-    
-    if(Cookie.get('authToken')=== undefined || Cookie.get('authToken')==='' || Cookie.get('authToken')===null){
-
-      this.router.navigate(['/']);
-    
-      return false;
-    
-    }else{
-
-      return true;
-    }
-  }
-
+  
   public verifyUserConfirmation:any=()=>{
 
        this.SocketService.verifyUser().subscribe((data)=>{
@@ -113,9 +101,9 @@ export class ChatboxComponent implements OnInit, AfterViewInit {
 
  }
 
-  public sendMessageUsingKeyPress:any=(event:any)=> {
+  public sendMessageUsingKeyPress:any=($event:any)=> {
 
-      if(event.keyCode===13){
+      if($event.key==="Enter"){
         this.sendMessage();
       }
   }

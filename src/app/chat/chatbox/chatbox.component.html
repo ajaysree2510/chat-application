@@ -115,9 +115,9 @@
       <!-- end chat-history -->
 
       <div class="chat-message clearfix p-2" *ngIf="receiverName">
-        <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"
+        <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeyPress($event)" [(ngModel)]="messageText"
           placeholder="Type your message" rows="3"></textarea>
-
+=
         <button (click)="sendMessage()">Send</button>
 
       </div>
